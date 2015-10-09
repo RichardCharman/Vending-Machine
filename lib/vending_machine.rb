@@ -4,19 +4,29 @@ class VendingMachine
   attr_reader :display, :coin_return
 
   def initialize
-    @display = 'INSERT COIN'
+    self.display = 'INSERT COIN'
+    self.coins = []
   end
 
   def insert coin
     if VALID_COINS.include? coin
-      self.display = "#{coin} cents"
+      self.coins.push(coin)
+      self.display = "#{total} cents"
     else
       self.coin_return = coin
     end
   end
 
+  protected
+
+  attr_reader :coins
+
   private
 
-  attr_writer :display, :coin_return
+  attr_writer :display, :coin_return, :coins
+
+  def total
+    self.coins.map(&:to_i).inject(:+)
+  end
 
 end

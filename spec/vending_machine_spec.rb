@@ -16,6 +16,13 @@ describe VendingMachine do
       subject.insert '25'
       expect(subject.display).to eq '25 cents'
     end
+
+    it 'accepts coin combo and updates display' do
+      subject.insert '5'
+      subject.insert '10'
+      subject.insert '25'
+      expect(subject.display).to eq '40 cents'
+    end
   end
 
   context 'invalid coins' do
